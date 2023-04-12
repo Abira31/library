@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_filters',
 
     'catalog',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -132,5 +133,13 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 GRAPHENE = {
-    'SCHEMA':'library.schema.schema'
+    'SCHEMA':'library.schema.schema',
+    'MIDDLEWARE':[
+        'graphql_jwt.middleware.JSONWebTokenMiddleware',
+    ]
 }
+
+AUTHENTICATION_BACKENDS = [
+    'graphql_jwt.backends.JSONWebTokenBackend',
+    'django.contrib.auth.backends.ModelBackend'
+]
